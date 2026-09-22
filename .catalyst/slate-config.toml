@@ -1,0 +1,2 @@
+framework = "nextjs"
+deployment_name = "default"

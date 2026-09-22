@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-color: #090d16;
+    --sub-color: #64748b;
+    --main-color: #38bdf8;
+    --text-color: #f8fafc;
+    --error-color: #f43f5e;
+    --error-extra: #9f1239;
+    --card-bg: rgba(15, 23, 42, 0.65);
+    --card-border: rgba(56, 189, 248, 0.15);
+    --card-glow: rgba(56, 189, 248, 0.08);
+  }
+
+  [data-theme='serika-dark'] {
+    --bg-color: #1a1b1e;
+    --sub-color: #717377;
+    --main-color: #e2b714;
+    --text-color: #e6e6e2;
+    --error-color: #ca4754;
+    --error-extra: #7e2a33;
+    --card-bg: rgba(36, 38, 41, 0.7);
+    --card-border: rgba(226, 183, 20, 0.2);
+    --card-glow: rgba(226, 183, 20, 0.08);
+  }
+
+  [data-theme='slate-dark'] {
+    --bg-color: #0b0f19;
+    --sub-color: #64748b;
+    --main-color: #38bdf8;
+    --text-color: #f8fafc;
+    --error-color: #f43f5e;
+    --error-extra: #9f1239;
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(56, 189, 248, 0.2);
+    --card-glow: rgba(56, 189, 248, 0.1);
+  }
+
+  [data-theme='cyberpunk'] {
+    --bg-color: #070712;
+    --sub-color: #626487;
+    --main-color: #00f0ff;
+    --text-color: #f0f6fc;
+    --error-color: #ff007f;
+    --error-extra: #99004d;
+    --card-bg: rgba(19, 18, 38, 0.75);
+    --card-border: rgba(0, 240, 255, 0.25);
+    --card-glow: rgba(0, 240, 255, 0.1);
+  }
+
+  [data-theme='matrix'] {
+    --bg-color: #050d08;
+    --sub-color: #245837;
+    --main-color: #00ff66;
+    --text-color: #86efac;
+    --error-color: #ff3344;
+    --error-extra: #991b1b;
+    --card-bg: rgba(10, 26, 16, 0.75);
+    --card-border: rgba(0, 255, 102, 0.25);
+    --card-glow: rgba(0, 255, 102, 0.1);
+  }
+
+  [data-theme='dracula'] {
+    --bg-color: #1e1f29;
+    --sub-color: #7b88ab;
+    --main-color: #bd93f9;
+    --text-color: #f8f8f2;
+    --error-color: #ff5555;
+    --error-extra: #900c3f;
+    --card-bg: rgba(40, 42, 54, 0.75);
+    --card-border: rgba(189, 147, 249, 0.25);
+    --card-glow: rgba(189, 147, 249, 0.1);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-geist-mono), monospace, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  user-select: none;
+  min-height: 100vh;
+}
+
+/* Subtle background grid pattern */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphic arena card */
+.glass-arena {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 40px -10px var(--card-glow);
+  backdrop-filter: blur(16px);
+}
+
+/* Caret smooth animation with physics-based linear easing stops */
+.smooth-caret {
+  transition: left 0.1s linear(0, 0.22 15%, 0.65 35%, 0.95 65%, 1), top 0.12s ease-out;
+}
+
+@keyframes caret-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret-blinking {
+  animation: caret-blink 1.05s infinite ease-in-out;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sub-color);
+  opacity: 0.3;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color);
 }
